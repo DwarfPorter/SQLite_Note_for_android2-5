@@ -12,9 +12,12 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import ru.geekbrains.notes.NoteLogic;
 import ru.geekbrains.notes.R;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements GetableNoteLogic {
+
+    private NoteLogic noteLogic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,5 +56,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void putNoteLogic(NoteLogic noteLogic) {
+        this.noteLogic = noteLogic;
     }
 }

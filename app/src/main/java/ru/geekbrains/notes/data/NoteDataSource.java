@@ -33,26 +33,22 @@ public class NoteDataSource  implements Closeable {
     }
 
     // Добавить новую запись
-    public Note addNote(String title, String description) {
+    public Note addNote(Note note) {
         ContentValues values = new ContentValues();
-        values.put(DatabaseHelper.COLUMN_NOTE, description);
-        values.put(DatabaseHelper.COLUMN_NOTE_TITLE, title);
+        values.put(DatabaseHelper.COLUMN_NOTE, note.getDescription());
+        values.put(DatabaseHelper.COLUMN_NOTE_TITLE, note.getTitle());
         // Добавление записи
         long insertId = database.insert(DatabaseHelper.TABLE_NOTES, null,
                 values);
-        Note newNote = new Note();
-        newNote.setDescription(description);
-        newNote.setTitle(title);
-        newNote.setId(insertId);
-        return newNote;
+        return note.Copy(insertId);
     }
 
     // Изменить запись
-    public void editNote(Note note, String description, String title) {
+    public void editNote(Note note) {
         ContentValues editedNote = new ContentValues();
         editedNote.put(DatabaseHelper.COLUMN_ID, note.getId());
-        editedNote.put(DatabaseHelper.COLUMN_NOTE, description);
-        editedNote.put(DatabaseHelper.COLUMN_NOTE_TITLE, title);
+        editedNote.put(DatabaseHelper.COLUMN_NOTE, note.getDescription());
+        editedNote.put(DatabaseHelper.COLUMN_NOTE_TITLE, note.getTitle());
         // изменение записи
         database.update(DatabaseHelper.TABLE_NOTES,
                 editedNote,

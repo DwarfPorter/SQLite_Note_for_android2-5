@@ -28,4 +28,12 @@ public class Note {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public Note Copy(long id){
+        Note newNote = new Note();
+        newNote.setDescription(this.getDescription());
+        newNote.setTitle(this.getTitle());
+        newNote.setId(id);
+        return newNote;
+    }
 }

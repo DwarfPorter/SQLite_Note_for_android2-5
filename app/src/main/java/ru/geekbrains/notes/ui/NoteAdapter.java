@@ -14,7 +14,7 @@ import ru.geekbrains.notes.R;
 import ru.geekbrains.notes.data.Note;
 import ru.geekbrains.notes.data.NoteDataReader;
 
-public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
+public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> implements AdapterChangeable {
 
     private NoteDataReader noteDataReader;                  // Здесь нам нужен только читатель дарнных
     private OnMenuItemClickListener itemMenuClickListener;  // Слушатель, будет устанавливаться извне
@@ -51,7 +51,12 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
         this.itemMenuClickListener = onMenuItemClickListener;
     }
 
-    // интерфейс для обработки мен
+    @Override
+    public void notifyDataChange() {
+        notifyDataSetChanged();
+    }
+
+    // интерфейс для обработки меню
     public interface OnMenuItemClickListener {
         void onItemEditClick(Note note);
         void onItemDeleteClick(Note note);
