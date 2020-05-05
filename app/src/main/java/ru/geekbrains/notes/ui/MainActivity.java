@@ -17,13 +17,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import ru.geekbrains.notes.IRepository;
 import ru.geekbrains.notes.NoteLogic;
 import ru.geekbrains.notes.R;
 import ru.geekbrains.notes.data.Note;
+import ru.geekbrains.notes.data.SQLiteRepository;
 
 public class MainActivity extends AppCompatActivity {
 
     private NoteLogic noteLogic;
+    IRepository repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        repository = new SQLiteRepository(getApplicationContext());
         initRecyclerView();
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -44,12 +48,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initRecyclerView() {
-        noteLogic = new NoteLogic(getApplicationContext());
+        noteLogic = new NoteLogic(repository);
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         // Адаптер для RecyclerView
-        NoteAdapter adapter = new NoteAdapter(noteLogic.getNoteDataReader());
+        NoteAdapter adapter = new NoteAdapter(noteLogic.getRepository());
         noteLogic.setAdapter(adapter);
 
         adapter.setOnMenuItemClickListener(new NoteAdapter.OnMenuItemClickListener() {

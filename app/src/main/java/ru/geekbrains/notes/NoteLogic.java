@@ -1,57 +1,45 @@
 package ru.geekbrains.notes;
 
-import android.content.Context;
-
 import ru.geekbrains.notes.data.Note;
-import ru.geekbrains.notes.data.NoteDataReader;
-import ru.geekbrains.notes.data.NoteDataSource;
 import ru.geekbrains.notes.ui.AdapterChangeable;
 
 public class NoteLogic {
-    private NoteDataSource notesDataSource;     // Источник данных
-    private NoteDataReader noteDataReader;      // Читатель данных
+    private IRepository repository;
     private AdapterChangeable adapter;           // Отправим сигнал изменения данных
 
-    public NoteLogic(Context context){
-        notesDataSource = new NoteDataSource(context);
-        getNotesDataSource().open();
-        noteDataReader = getNotesDataSource().getNoteDataReader();
+    public NoteLogic(IRepository repository){
+        this.repository = repository;
     }
 
-    public void setAdapter(AdapterChangeable adaper){
-        this.adapter = adaper;
+    public void setAdapter(AdapterChangeable adapter){
+        this.adapter = adapter;
     }
 
     public void addNote(Note note){
-        getNotesDataSource().addNote(note);
+        getRepository().add(note);
         updateNote();
     }
 
     public void editNote(Note note) {
-        getNotesDataSource().editNote(note);
+        getRepository().update(note);
         updateNote();
     }
 
     public void deleteNote(Note note) {
-        getNotesDataSource().deleteNote(note);
+        getRepository().delete(note);
         updateNote();
     }
 
     public void clearList() {
-        getNotesDataSource().deleteAll();
+        getRepository().deleteAll();
         updateNote();
     }
 
+    public IRepository getRepository() {
+        return repository;
+    }
+
     private void updateNote(){
-        getNoteDataReader().Refresh();
         adapter.notifyDataChange();
-    }
-
-    public NoteDataReader getNoteDataReader() {
-        return noteDataReader;
-    }
-
-    public NoteDataSource getNotesDataSource() {
-        return notesDataSource;
     }
 }
