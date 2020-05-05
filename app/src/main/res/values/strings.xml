@@ -4,4 +4,8 @@
     <string name="menu_clear">Clear</string>
     <string name="menu_delete">Delete</string>
     <string name="menu_edit">Edit</string>
+    <string name="title">Title</string>
+    <string name="note">Note</string>
+    <string name="alert_cancel">Cancel</string>
+    <string name="alert_title_add">Add note</string>
 </resources>

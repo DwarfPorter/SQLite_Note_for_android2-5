@@ -65,11 +65,13 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> im
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView textNote;
+        private TextView textDescription;
         private Note note;
 
         public ViewHolder(View itemView) {
             super(itemView);
             textNote = itemView.findViewById(R.id.textTitle);
+            textDescription = itemView.findViewById(R.id.textNote);
             // при тапе на элементе - вытащим  меню
             textNote.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
@@ -86,6 +88,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> im
         public void bind(Note note){
             this.note = note;
             textNote.setText(note.getTitle());
+            textDescription.setText(note.getDescription());
         }
 
         private void showPopupMenu(View view) {

@@ -10,44 +10,48 @@ import ru.geekbrains.notes.ui.AdapterChangeable;
 public class NoteLogic {
     private NoteDataSource notesDataSource;     // Источник данных
     private NoteDataReader noteDataReader;      // Читатель данных
-    private AdapterChangeable adaper;           // Отправим сигнал изменения данных
+    private AdapterChangeable adapter;           // Отправим сигнал изменения данных
 
     public NoteLogic(Context context){
         notesDataSource = new NoteDataSource(context);
-        notesDataSource.open();
-        noteDataReader = notesDataSource.getNoteDataReader();
+        getNotesDataSource().open();
+        noteDataReader = getNotesDataSource().getNoteDataReader();
     }
 
-    public void setAdaper(AdapterChangeable adaper){
-        this.adaper = adaper;
+    public void setAdapter(AdapterChangeable adaper){
+        this.adapter = adaper;
     }
 
     public void addNote(Note note){
-        notesDataSource.addNote(note);
+        getNotesDataSource().addNote(note);
         updateNote();
     }
 
     public void editNote(Note note) {
-        notesDataSource.editNote(note);
+        getNotesDataSource().editNote(note);
         updateNote();
     }
 
     public void deleteNote(Note note) {
-        notesDataSource.deleteNote(note);
+        getNotesDataSource().deleteNote(note);
         updateNote();
     }
 
     public void clearList() {
-        notesDataSource.deleteAll();
+        getNotesDataSource().deleteAll();
         updateNote();
     }
 
     private void updateNote(){
         getNoteDataReader().Refresh();
-        adaper.notifyDataChange();
+        adapter.notifyDataChange();
     }
 
     public NoteDataReader getNoteDataReader() {
         return noteDataReader;
+    }
+
+    public NoteDataSource getNotesDataSource() {
+        return notesDataSource;
     }
 }
