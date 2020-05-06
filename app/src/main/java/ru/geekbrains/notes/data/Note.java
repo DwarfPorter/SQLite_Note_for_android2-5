@@ -1,8 +1,19 @@
 package ru.geekbrains.notes.data;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Note {
+
+    @PrimaryKey(autoGenerate = true)
     private long id;
+
+    @ColumnInfo(name = "DESCRIPTION")
     private String description;
+
+    @ColumnInfo(name = "TITLE")
     private String title;
 
     public long getId() {

@@ -1,15 +1,18 @@
-package ru.geekbrains.notes.data;
+package ru.geekbrains.notes.dataSQLite;
 
 import android.content.Context;
 
+import ru.geekbrains.notes.App;
 import ru.geekbrains.notes.IRepository;
+import ru.geekbrains.notes.data.Note;
 
 public class SQLiteRepository implements IRepository {
 
     private NoteDataSource notesDataSource;     // Источник данных
     private NoteDataReader noteDataReader;      // Читатель данных
 
-    public SQLiteRepository(Context context){
+    public SQLiteRepository(){
+        Context context = App.getInstance().getApplicationContext();
         notesDataSource = new NoteDataSource(context);
         notesDataSource.open();
         noteDataReader = notesDataSource.getNoteDataReader();

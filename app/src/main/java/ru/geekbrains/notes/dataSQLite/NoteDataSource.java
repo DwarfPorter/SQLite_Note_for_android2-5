@@ -1,4 +1,4 @@
-package ru.geekbrains.notes.data;
+package ru.geekbrains.notes.dataSQLite;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,6 +6,8 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.io.Closeable;
+
+import ru.geekbrains.notes.data.Note;
 
 //  Источник данных, позволяет изменять данные в таблице
 // Создает и держит в себе читатель данных

@@ -1,9 +1,11 @@
-package ru.geekbrains.notes.data;
+package ru.geekbrains.notes.dataSQLite;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.io.Closeable;
+
+import ru.geekbrains.notes.data.Note;
 
 // Читатель источника данных на основе курсора.
 public class NoteDataReader implements Closeable {

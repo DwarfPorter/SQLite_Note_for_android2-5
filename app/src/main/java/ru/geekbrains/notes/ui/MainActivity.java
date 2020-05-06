@@ -21,7 +21,8 @@ import ru.geekbrains.notes.IRepository;
 import ru.geekbrains.notes.NoteLogic;
 import ru.geekbrains.notes.R;
 import ru.geekbrains.notes.data.Note;
-import ru.geekbrains.notes.data.SQLiteRepository;
+import ru.geekbrains.notes.dataRoom.RoomRepository;
+import ru.geekbrains.notes.dataSQLite.SQLiteRepository;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        repository = new SQLiteRepository(getApplicationContext());
+        //repository = new SQLiteRepository();
+        repository = new RoomRepository();
         initRecyclerView();
 
         FloatingActionButton fab = findViewById(R.id.fab);

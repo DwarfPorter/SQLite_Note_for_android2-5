@@ -1,4 +1,4 @@
-package ru.geekbrains.notes.data;
+package ru.geekbrains.notes.dataSQLite;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
